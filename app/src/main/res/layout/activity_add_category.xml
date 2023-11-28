@@ -17,12 +17,43 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addCatCancelButton"
+    <TextView
+        android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="120dp"
+        android:text="Category Name:"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editTextText"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+
+        android:hint="Ex) School"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:layout_gravity="center"
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/addCatCancelButton"
+        android:layout_width="95dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="cancel"
         android:textAlignment="viewStart" />
+
 </LinearLayout>
