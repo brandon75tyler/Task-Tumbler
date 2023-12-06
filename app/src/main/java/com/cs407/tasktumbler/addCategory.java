@@ -26,7 +26,7 @@ public class addCategory extends AppCompatActivity {
     }
 
     public void goToActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CategoriesPage.class);
         startActivity(intent);
     }
 

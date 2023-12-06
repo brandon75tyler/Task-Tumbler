@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".CategoriesPage">
 
     <TextView
-        android:id="@+id/timelineHeader"
+        android:id="@+id/categoriesHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:text="Today's To-dos"
+        android:text="Categories"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/timelineAdd"
+        android:id="@+id/categoriesAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="300dp"
@@ -33,7 +33,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/timelineButton"
+            android:id="@+id/timelineButton2"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/categoriesButton"
+            android:id="@+id/categoriesButton2"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

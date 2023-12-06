@@ -1,56 +1,44 @@
 package com.cs407.tasktumbler;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    public void categoriesClicked(){
+        Intent intent = new Intent(this, CategoriesPage.class);
+        startActivity(intent);
+    }
+
+    public void timelineAddClicked(){
+        Intent intent2 = new Intent(this, addToDo.class);
+        startActivity(intent2);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        Button categoriesButton = findViewById(R.id.categoriesButton);
+        categoriesButton.setOnClickListener(new View.OnClickListener() {
 
-        Button firstFragmentButton = findViewById(R.id.firstFragmentButton);
-        firstFragmentButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v){
-                fragmentManager.beginTransaction()
-                        .replace(R.id.mainFragmentContainer, FirstFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("Showing First")
-                        .commit();
+            public void onClick(View v) {
+                categoriesClicked();
             }
         });
 
-        Button secondFragmentButton = findViewById(R.id.secondFragmentButton);
-        secondFragmentButton.setOnClickListener(new View.OnClickListener(){
+        Button timelineAdd = findViewById(R.id.timelineAdd);
+        timelineAdd.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v){
-                Log.d("Tag", "I ran!");
-                fragmentManager.beginTransaction()
-                        .replace(R.id.mainFragmentContainer, SecondFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("Showing Second")
-                        .commit();
+            public void onClick(View v) {
+                timelineAddClicked();
             }
         });
-
-
-
-
-
-
-
-
 
     }
 }
