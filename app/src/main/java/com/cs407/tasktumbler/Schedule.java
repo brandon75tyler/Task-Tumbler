@@ -12,11 +12,11 @@ public class Schedule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(context, NotificationBroadcastReceiver.class);
-        intent.putExtra("task", task);
+        intent.putExtra("reminder", task);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // Set the alarm to trigger at the specified time
+
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     }
 

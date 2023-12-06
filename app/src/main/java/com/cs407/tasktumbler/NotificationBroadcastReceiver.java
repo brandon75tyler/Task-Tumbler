@@ -10,6 +10,6 @@ import android.widget.Toast;
 public class NotificationBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Reminder: " + intent.getStringExtra("task"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Task to do: " + intent.getStringExtra("reminder"), Toast.LENGTH_SHORT).show();
     }
 }
