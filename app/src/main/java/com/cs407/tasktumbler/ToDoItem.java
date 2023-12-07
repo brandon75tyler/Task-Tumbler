@@ -9,10 +9,10 @@ public class ToDoItem {
 
     public ToDoItem(String name, String details, String date, String time, String category){
         this.name = name;
-        this.details = name;
+        this.details = details;
         this.date = date;
         this.time = time;
-        this.category = time;
+        this.category = category;
     }
 
     public String getName() { return name; }

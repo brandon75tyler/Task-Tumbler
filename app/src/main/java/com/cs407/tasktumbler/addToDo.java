@@ -2,7 +2,10 @@ package com.cs407.tasktumbler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,12 +29,28 @@ public class addToDo extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView task_name = findViewById(R.id.itemNameText);
-                String task = task_name.getText().toString();
+                Context context = getApplicationContext();
+                SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("notes", Context.MODE_PRIVATE, null);
+                DBHelper dbHelper = new DBHelper(sqLiteDatabase);
 
-                TextView task_time = findViewById(R.id.itemTimeText);
-                String time = task_time.getText().toString();
+                //SharedPreferences sharedPreferences = getSharedPreferences("com.cs407.lab5_milestone1", Context.MODE_PRIVATE);
 
+                TextView nameTextBox = findViewById(R.id.itemNameText);
+                String name = nameTextBox.getText().toString();
+
+                TextView detailsTextBox = findViewById(R.id.itemDetailsText);
+                String details = detailsTextBox.getText().toString();
+
+                TextView dateTextBox = findViewById(R.id.itemDateText);
+                String date = dateTextBox.getText().toString();
+
+                TextView timeTextBox = findViewById(R.id.itemTimeText);
+                String time = timeTextBox.getText().toString();
+
+                TextView categoryTextBox = findViewById(R.id.itemCategoryText);
+                String category = categoryTextBox.getText().toString();
+
+                dbHelper.saveToDoItem(name, details, date, time, category);
 
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -44,9 +63,10 @@ public class addToDo extends AppCompatActivity {
                 }
 
 
+
                 long reminderTimeInMillis = calendar.getTimeInMillis() + 10 * 1000;
 
-                Schedule.setReminder(addToDo.this, task, reminderTimeInMillis);
+                Schedule.setReminder(addToDo.this, name, reminderTimeInMillis);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
