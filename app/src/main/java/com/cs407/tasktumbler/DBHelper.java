@@ -60,4 +60,42 @@ public class DBHelper {
         sqLiteDatabase.execSQL("DELETE FROM toDoItems WHERE name = ? AND details = ?",
                 new String[]{name, details});
     }
+
+    public static void createCatTable() {
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS categories " + "(id INTEGER PRIMARY KEY, itemid INTEGER, name TEXT)");
+    }
+
+    public ArrayList<Category> readCategories() {
+
+        createCatTable();
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM categories",
+                new String[]{});
+        int nameIndex = c.getColumnIndex("name");
+        c.moveToFirst();
+        ArrayList<Category> categoryList = new ArrayList<>();
+
+        while (!c.isAfterLast()) {
+            String name = c.getString(nameIndex);
+
+            Category category = new Category(name);
+            categoryList.add(category);
+            c.moveToNext();
+        }
+
+        c.close();
+        sqLiteDatabase.close();
+        return categoryList;
+    }
+
+    public void saveCategory(String name) {
+        createCatTable();
+        sqLiteDatabase.execSQL("INSERT INTO categories (name) VALUES (?)",
+                new String[]{name});
+    }
+
+    public void deleteCategory(String name) {
+        createCatTable();
+        sqLiteDatabase.execSQL("DELETE FROM categories WHERE name = ?",
+                new String[]{name});
+    }
 }

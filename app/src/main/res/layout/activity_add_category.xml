@@ -27,7 +27,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/categoryNameText"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/createCategoryButton"
         android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="380dp"
@@ -50,10 +50,9 @@
     <Button
         android:id="@+id/addCatCancelButton"
         android:layout_width="95dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:text="cancel"
-        android:textAlignment="viewStart" />
+        android:text="Cancel"
+        android:layout_gravity="center" />
 
 </LinearLayout>
