@@ -5,6 +5,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,18 +63,25 @@ public class addToDo extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-                try {
-                    calendar.setTime(sdf.parse(time));
-                } catch (ParseException e) {
-                    Log.d("Error","Error occurred in getting time");
-                    return;
-                }
 
+//                try {
+//                    calendar.setTime(sdf.parse(time));
+//
+//                } catch (ParseException e) {
+//                    Log.d("Error","Error occurred in getting time");
+//                    return;
+//                }
+                calendar.setTimeInMillis(System.currentTimeMillis()+ 10*1000);
 
+                Log.d("time",time);
+                Log.d("time",""+System.currentTimeMillis());
+//                long reminderTimeInMillis = calendar.getTimeInMillis() + 10*1000 ;
+                Log.d("reminderTimeInMillis", "" + calendar.getTimeInMillis());
+                createNotificationChannel();
+                requestPermission();
 
-                long reminderTimeInMillis = calendar.getTimeInMillis() + 10 * 1000;
-
-                Schedule.setReminder(addToDo.this, name, reminderTimeInMillis);
+                Schedule.setReminder(addToDo.this, name, calendar.getTimeInMillis());
+                finish();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -106,4 +115,13 @@ public class addToDo extends AppCompatActivity {
             requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
         }
     }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+    }
+
 }

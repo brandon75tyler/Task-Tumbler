@@ -6,8 +6,11 @@ import android.content.BroadcastReceiver;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -17,15 +20,15 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         String task = intent.getStringExtra("reminder");
 
-        // Create an intent to open MainActivity
+        Log.d("Brodcast", "triggered");
         Intent launchIntent = new Intent(context, MainActivity.class);
         launchIntent.putExtra("reminder", task);
 
-        // Create a PendingIntent to wrap the intent
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("brodcast", "" + System.currentTimeMillis());
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
+                .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("Task Reminder")
                 .setContentText("Task to do: " + task)
                 .setContentIntent(pendingIntent)
@@ -33,6 +36,17 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         // Show the notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(0, builder.build());
+        // Use a unique notification ID
+        int notificationId = generateUniqueNotificationId();
+
+
+        notificationManager.notify(notificationId, builder.build());
+
     }
+
+    private int generateUniqueNotificationId() {
+        return (int) System.currentTimeMillis();
+        }
+
+
 }
