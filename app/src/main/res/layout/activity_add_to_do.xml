@@ -65,7 +65,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="25dp"
         android:ems="10"
-        android:hint="ex) 10/30/2024"
+        android:hint="ex) 2024/2/15"
         android:inputType="date" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="25dp"
         android:ems="10"
-        android:hint="ex) 12:00"
+        android:hint="ex) 16:00"
         android:inputType="time" />
     <TextView
         android:id="@+id/itemCategoryLabel"

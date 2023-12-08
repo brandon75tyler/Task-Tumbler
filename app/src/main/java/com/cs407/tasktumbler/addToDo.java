@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class addToDo extends AppCompatActivity {
@@ -60,10 +61,10 @@ public class addToDo extends AppCompatActivity {
 
                 dbHelper.saveToDoItem(name, details, date, time, category);
 
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-
-
+//                Calendar calendar = Calendar.getInstance();
+//                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+//
+//
 //                try {
 //                    calendar.setTime(sdf.parse(time));
 //
@@ -71,16 +72,30 @@ public class addToDo extends AppCompatActivity {
 //                    Log.d("Error","Error occurred in getting time");
 //                    return;
 //                }
-                calendar.setTimeInMillis(System.currentTimeMillis()+ 10*1000);
+////                calendar.setTimeInMillis(System.currentTimeMillis()+ 10*1000);
+//                Log.d("time", ""+time);
+//                long reminderTimeInMillis = calendar.getTimeInMillis()  ;
+                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+                String dateTimeString = date + " " + time;
+                Date dateTime;
+                try {
+                    dateTime = dateTimeFormat.parse(dateTimeString);
+                } catch (ParseException e) {
+                    Log.d("Error", "Error occurred in parsing date and time");
+                    return;
+                }
 
-                Log.d("time",time);
-                Log.d("time",""+System.currentTimeMillis());
-//                long reminderTimeInMillis = calendar.getTimeInMillis() + 10*1000 ;
-                Log.d("reminderTimeInMillis", "" + calendar.getTimeInMillis());
+                // Convert Date object to Calendar and set the desired date and time
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateTime);
+
+                // Get the timestamp in milliseconds
+                long reminderTimeInMillis = calendar.getTimeInMillis();
+                Log.d("time in mili", ""+reminderTimeInMillis);
                 createNotificationChannel();
                 requestPermission();
-
-                Schedule.setReminder(addToDo.this, name, calendar.getTimeInMillis());
+                Schedule.setReminder(addToDo.this, name ,reminderTimeInMillis);
+//                Schedule.setReminder(addToDo.this, name,calendar.getTimeInMillis());
                 finish();
             }
         });

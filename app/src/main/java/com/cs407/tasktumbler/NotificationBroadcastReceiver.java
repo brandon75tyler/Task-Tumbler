@@ -20,11 +20,11 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         String task = intent.getStringExtra("reminder");
 
-        Log.d("Brodcast", "triggered");
+
         Intent launchIntent = new Intent(context, MainActivity.class);
         launchIntent.putExtra("reminder", task);
 
-        Log.d("brodcast", "" + System.currentTimeMillis());
+
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
