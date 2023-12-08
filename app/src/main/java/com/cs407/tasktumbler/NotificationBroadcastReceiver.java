@@ -18,11 +18,13 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String task = intent.getStringExtra("reminder");
-
+//        String name = intent.getStringExtra("reminder");
+        String name = intent.getStringExtra("reminder");
+        Log.d("broadcast", ""+name);
 
         Intent launchIntent = new Intent(context, MainActivity.class);
-        launchIntent.putExtra("reminder", task);
+        launchIntent.putExtra("reminder", name);
+
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
@@ -30,7 +32,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("Task Reminder")
-                .setContentText("Task to do: " + task)
+                .setContentText("Task to do: " + name)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 

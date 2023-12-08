@@ -39,8 +39,7 @@
 
         <receiver
             android:name=".NotificationBroadcastReceiver"
-            android:enabled="true"
-            android:exported="false" />
+             />
     </application>
 
 </manifest>

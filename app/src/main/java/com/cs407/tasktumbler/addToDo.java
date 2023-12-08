@@ -61,20 +61,7 @@ public class addToDo extends AppCompatActivity {
 
                 dbHelper.saveToDoItem(name, details, date, time, category);
 
-//                Calendar calendar = Calendar.getInstance();
-//                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-//
-//
-//                try {
-//                    calendar.setTime(sdf.parse(time));
-//
-//                } catch (ParseException e) {
-//                    Log.d("Error","Error occurred in getting time");
-//                    return;
-//                }
-////                calendar.setTimeInMillis(System.currentTimeMillis()+ 10*1000);
-//                Log.d("time", ""+time);
-//                long reminderTimeInMillis = calendar.getTimeInMillis()  ;
+
                 SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
                 String dateTimeString = date + " " + time;
                 Date dateTime;
@@ -91,11 +78,11 @@ public class addToDo extends AppCompatActivity {
 
                 // Get the timestamp in milliseconds
                 long reminderTimeInMillis = calendar.getTimeInMillis();
-                Log.d("time in mili", ""+reminderTimeInMillis);
+                Log.d("time_current" , ""+reminderTimeInMillis);
+                Log.d("name in apptodo", ""+name);
                 createNotificationChannel();
                 requestPermission();
                 Schedule.setReminder(addToDo.this, name ,reminderTimeInMillis);
-//                Schedule.setReminder(addToDo.this, name,calendar.getTimeInMillis());
                 finish();
             }
         });
