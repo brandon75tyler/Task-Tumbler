@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 public class Schedule {
 
+
     public static void setReminder(Context context, String name, long triggerAtMillis) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -18,7 +19,6 @@ public class Schedule {
         intent.putExtra("reminder", name);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     }
 
