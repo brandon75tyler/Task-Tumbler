@@ -132,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
             float delta = mAccelCurrent - mAccelLast;
             mAccel = mAccel * 0.9f + delta;
             if(mAccel > 12) {
-                Toast.makeText(getApplicationContext(), "Shake event detected",
-                        Toast.LENGTH_SHORT).show();
+                shakeDetected();
             }
         }
 
@@ -141,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
+
+    public void shakeDetected(){
+        Toast.makeText(getApplicationContext(), "Shake event detected",
+                Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onResume() {

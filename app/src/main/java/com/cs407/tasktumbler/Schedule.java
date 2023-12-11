@@ -15,7 +15,6 @@ public class Schedule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(context, NotificationBroadcastReceiver.class);
-        Log.d("schedule", ""+name);
         intent.putExtra("reminder", name);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
