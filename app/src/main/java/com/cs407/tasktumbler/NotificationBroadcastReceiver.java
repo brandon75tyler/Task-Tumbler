@@ -24,17 +24,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("TaskTumbler", Context.MODE_PRIVATE, null);
-        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
-
-        toDoItems1 = dbHelper.readToDoItems();
-        String name = "";
+        String name = intent.getStringExtra("reminder");
 
         Intent launchIntent = new Intent(context, MainActivity.class);
-//        launchIntent.putExtra("reminder", name);
-        for (ToDoItem toDoItem: toDoItems1){
-            name = toDoItem.getName();
-        }
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
