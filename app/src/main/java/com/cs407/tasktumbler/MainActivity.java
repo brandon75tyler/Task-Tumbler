@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -74,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displayToDoItems);
         ListView toDoItemsListView = (ListView) findViewById(R.id.listView);
         toDoItemsListView.setAdapter(adapter);
+
+        toDoItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), EditToDoItem.class);
+                intent.putExtra("toDoItemId", i);
+                startActivity(intent);
+            }
+        });
 
         Button categoriesButton = findViewById(R.id.categoriesButton);
         categoriesButton.setOnClickListener(new View.OnClickListener() {

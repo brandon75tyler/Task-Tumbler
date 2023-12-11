@@ -48,17 +48,24 @@ public class DBHelper {
                 new String[]{name, details, date, time, category});
     }
 
-    public void updateNotes(String name, String details, String date, String time, String category) {
+    public void updateToDoItem(String name, String details, String date, String time, String category) {
         createTable();
-        ToDoItem note = new ToDoItem(name, details, date, time, category);
+        ToDoItem toDoItem = new ToDoItem(name, details, date, time, category);
         sqLiteDatabase.execSQL("UPDATE toDoItems set details=?, date=?, time=?, category=? where name=?",
                 new String[]{details, date, time, category, name});
     }
 
     public void deleteToDoItem(String name, String details) {
         createTable();
-        sqLiteDatabase.execSQL("DELETE FROM toDoItems WHERE name = ? AND details = ?",
-                new String[]{name, details});
+        String date = "";
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT date from toDoItems where name = ?",
+                new String[]{name});
+        if (cursor.moveToNext()){
+            date = cursor.getString(0);
+        }
+        sqLiteDatabase.execSQL("DELETE FROM toDoItems WHERE name = ? AND date = ?",
+                new String[]{name, date});
+        cursor.close();
     }
 
     public static void createCatTable() {
