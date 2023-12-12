@@ -84,6 +84,8 @@ public class addToDo extends AppCompatActivity {
                 requestPermission();
                 Schedule.setReminder(addToDo.this, name ,reminderTimeInMillis);
                 finish();
+
+                goToActivity();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {

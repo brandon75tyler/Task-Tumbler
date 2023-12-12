@@ -25,10 +25,12 @@ import android.widget.Toast;
 import java.util.Objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
     //Shake Event Stuff
+
     private SensorManager mSensorManager;
     private float mAccel;
     private float mAccelCurrent;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         toDoItems1 = dbHelper.readToDoItems();
 
-        ArrayList<String> displayToDoItems = new ArrayList<>();
 
         for (ToDoItem toDoItem: toDoItems1){
             displayToDoItems.add(String.format("Name: %s\nDetails: %s\nDate: %s\nTime: %s\nCategory: %s\n", toDoItem.getName(), toDoItem.getDetails(), toDoItem.getDate(), toDoItem.getTime(), toDoItem.getCategory()));
@@ -142,8 +143,15 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void shakeDetected(){
-        Toast.makeText(getApplicationContext(), "Shake event detected",
+        Toast.makeText(getApplicationContext(), "TASKS TUMBLING...",
                 Toast.LENGTH_SHORT).show();
+
+        Collections.rotate(displayToDoItems, 1);
+        Collections.rotate(toDoItems1, 1);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displayToDoItems);
+        ListView toDoItemsListView = (ListView) findViewById(R.id.listView);
+        toDoItemsListView.setAdapter(adapter);
     }
 
     @Override
