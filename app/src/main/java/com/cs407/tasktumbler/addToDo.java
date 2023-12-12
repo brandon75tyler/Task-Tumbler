@@ -78,7 +78,7 @@ public class addToDo extends AppCompatActivity {
 
                 // Get the timestamp in milliseconds
                 long reminderTimeInMillis = calendar.getTimeInMillis();
-                Log.d("time_current" , ""+reminderTimeInMillis);
+
                 Log.d("name in apptodo", ""+name);
                 createNotificationChannel();
                 requestPermission();
@@ -89,9 +89,7 @@ public class addToDo extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
-                goToActivity();
-            }
+            public void onClick(View v){goToActivity();}
         });
     }
 

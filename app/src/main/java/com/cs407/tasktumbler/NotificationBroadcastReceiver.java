@@ -18,13 +18,21 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.ArrayList;
 
 public class NotificationBroadcastReceiver extends BroadcastReceiver {
-    private ArrayList<String> displayToDoItems = new ArrayList<>();
-    static ArrayList<ToDoItem> toDoItems1;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
 
-        String name = intent.getStringExtra("reminder");
+        String name= intent.getStringExtra("reminder");
+
+        Log.d("noti", ""+name);
+        if (intent.getExtras() != null) {
+            for (String key : intent.getExtras().keySet()) {
+                Log.d("noti", "Key: " + key + " Value: " + intent.getExtras().get(key));
+            }
+        } else {
+            Log.d("noti", "Intent extras are null");
+        }
 
         Intent launchIntent = new Intent(context, MainActivity.class);
 
@@ -42,8 +50,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         // Use a unique notification ID
         int notificationId = 123;
-
-
         notificationManager.notify(notificationId, builder.build());
 
     }

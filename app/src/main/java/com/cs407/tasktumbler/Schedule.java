@@ -13,7 +13,7 @@ public class Schedule {
 
     public static void setReminder(Context context, String name, long triggerAtMillis) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
+        Log.d("Name in scedule", ""+name);
         Intent intent = new Intent(context, NotificationBroadcastReceiver.class);
         intent.putExtra("reminder", name);
 

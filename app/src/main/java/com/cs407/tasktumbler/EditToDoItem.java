@@ -82,6 +82,7 @@ public class EditToDoItem extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Schedule.cancelReminder(EditToDoItem.this);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
