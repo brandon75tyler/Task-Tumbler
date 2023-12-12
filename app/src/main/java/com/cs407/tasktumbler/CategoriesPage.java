@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -48,6 +49,15 @@ public class CategoriesPage extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, displayCategories);
         ListView categoriesListView = (ListView) findViewById(R.id.listView);
         categoriesListView.setAdapter(adapter);
+
+        categoriesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), EditCategory.class);
+                intent.putExtra("categoryId", i);
+                startActivity(intent);
+            }
+        });
 
         Button timelineButton = findViewById(R.id.timelineButton2);
         timelineButton.setOnClickListener(new View.OnClickListener() {
