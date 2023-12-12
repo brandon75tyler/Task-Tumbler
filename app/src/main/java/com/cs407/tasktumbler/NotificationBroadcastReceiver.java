@@ -18,17 +18,28 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.ArrayList;
 
 public class NotificationBroadcastReceiver extends BroadcastReceiver {
+    private ArrayList<String> displayToDoItems = new ArrayList<>();
+    static ArrayList<ToDoItem> toDoItems1;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
         Intent launchIntent = new Intent(context, MainActivity.class);
-
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
+//        String name = intent.getStringExtra("reminder");
 
-        String name = intent.getStringExtra("message_key");
+
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("TaskTumbler", Context.MODE_PRIVATE, null);
+        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+
+        toDoItems1 = dbHelper.readToDoItems();
+        String name = "";
+
+        for (ToDoItem toDoItem: toDoItems1){name = toDoItem.getName();}
+//        name = intent.getStringExtra("reminder");
         Log.d("noti", ""+name);
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("You have a task to complete")
