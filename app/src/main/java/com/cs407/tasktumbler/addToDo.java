@@ -79,7 +79,7 @@ public class addToDo extends AppCompatActivity {
                 // Get the timestamp in milliseconds
                 long reminderTimeInMillis = calendar.getTimeInMillis();
 
-                Log.d("name in apptodo", ""+name);
+
                 createNotificationChannel();
                 requestPermission();
                 Schedule.setReminder(addToDo.this, name ,reminderTimeInMillis);

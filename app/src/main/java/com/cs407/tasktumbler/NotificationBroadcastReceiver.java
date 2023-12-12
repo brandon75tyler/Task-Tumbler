@@ -39,7 +39,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         for (ToDoItem toDoItem: toDoItems1){name = toDoItem.getName();}
 //        name = intent.getStringExtra("reminder");
-        Log.d("noti", ""+name);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("You have a task to complete")
