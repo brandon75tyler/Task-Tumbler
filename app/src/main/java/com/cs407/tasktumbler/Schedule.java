@@ -13,9 +13,9 @@ public class Schedule {
 
     public static void setReminder(Context context, String name, long triggerAtMillis) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Log.d("Name in scedule", ""+name);
+        Log.d("Name in schedule", name);
         Intent intent = new Intent(context, NotificationBroadcastReceiver.class);
-        intent.putExtra("reminder", name);
+        intent.putExtra("message_key", name);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);

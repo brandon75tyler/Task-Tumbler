@@ -22,29 +22,20 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
-        String name= intent.getStringExtra("reminder");
-
-        Log.d("noti", ""+name);
-        if (intent.getExtras() != null) {
-            for (String key : intent.getExtras().keySet()) {
-                Log.d("noti", "Key: " + key + " Value: " + intent.getExtras().get(key));
-            }
-        } else {
-            Log.d("noti", "Intent extras are null");
-        }
-
         Intent launchIntent = new Intent(context, MainActivity.class);
-
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_IMMUTABLE);
 
+        String name = intent.getStringExtra("message_key");
+        Log.d("noti", ""+name);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle("Task Reminder")
-                .setContentText("Task to do: " +name)
+                .setContentTitle("You have a task to complete")
+                .setContentText("Please " +name)
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setColor(0xFF0000FF);
 
         // Show the notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
